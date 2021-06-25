@@ -9,46 +9,46 @@ DELIMITER $$
 
 CREATE PROCEDURE `PIZCLIENTESMOD`(
 /* SP para realizar modificacion de clientes*/
-	Par_ClienteID               INT(11),        -- ID del Cliente
-    Par_Nombres					VARCHAR(250), 	-- Nombres del Cliente
-	Par_Apellidos				VARCHAR(250), 	-- Apellidos del Cliente
-	Par_Estatus					CHAR(1),			-- Estatus del Cliente\nA .- Activo\nB .- Bloqueado\nC .- Cancelado o Baja\nI .- Inactivo
-	Par_FechaAlta				DATE,			-- Fecha alta cliente 
-	Par_RFC						CHAR(13), 	 	-- RFC del Cliente
-	Par_Direccion				VARCHAR(200),	-- Direccion Completa del Cliente
-	Par_FechaNacimiento			DATE, 		 	-- Fecha de Nacimiento del Cliente
-	Par_Telefono				VARCHAR(10), 	-- Telefono Oficial del Cliente
+	Par_ClienteID               	INT(11),        -- ID del Cliente
+    Par_Nombres				VARCHAR(250), 	-- Nombres del Cliente
+	Par_Apellidos			VARCHAR(250), 	-- Apellidos del Cliente
+	Par_Estatus			CHAR(1),	-- Estatus del Cliente\nA .- Activo\nB .- Bloqueado\nC .- Cancelado o Baja\nI .- Inactivo
+	Par_FechaAlta			DATE,		-- Fecha alta cliente 
+	Par_RFC				CHAR(13), 	-- RFC del Cliente
+	Par_Direccion			VARCHAR(200),	-- Direccion Completa del Cliente
+	Par_FechaNacimiento		DATE, 		-- Fecha de Nacimiento del Cliente
+	Par_Telefono			VARCHAR(10), 	-- Telefono Oficial del Cliente
 	
-	Par_Salida					CHAR(1), 		-- Indica mensaje de Salida
-	INOUT Par_NumErr			INT(11),		-- Numero de Error
-	INOUT Par_ErrMen			VARCHAR(400),	-- Descripcion de Error
+	Par_Salida			CHAR(1), 	-- Indica mensaje de Salida
+	INOUT Par_NumErr		INT(11),	-- Numero de Error
+	INOUT Par_ErrMen		VARCHAR(400),	-- Descripcion de Error
 
-	Aud_EmpresaID				INT(11),		-- Parametro de Auditoria
-	Aud_Usuario					INT(11),		-- Parametro de Auditoria
-	Aud_FechaActual				DATETIME,		-- Parametro de Auditoria
-	Aud_DireccionIP				VARCHAR(15),	-- Parametro de Auditoria
-	Aud_ProgramaID				VARCHAR(50),	-- Parametro de Auditoria
-	Aud_Sucursal				INT(11),		-- Parametro de Auditoria
-	Aud_NumTransaccion			BIGINT(20)		-- Parametro de Auditoria
+	Aud_EmpresaID			INT(11),	-- Parametro de Auditoria
+	Aud_Usuario			INT(11),	-- Parametro de Auditoria
+	Aud_FechaActual			DATETIME,	-- Parametro de Auditoria
+	Aud_DireccionIP			VARCHAR(15),	-- Parametro de Auditoria
+	Aud_ProgramaID			VARCHAR(50),	-- Parametro de Auditoria
+	Aud_Sucursal			INT(11),	-- Parametro de Auditoria
+	Aud_NumTransaccion		BIGINT(20)	-- Parametro de Auditoria
 
 )
 TerminaStore: BEGIN
 	-- Declaracion de Variables
-	DECLARE Var_Control			VARCHAR(50);
+	DECLARE Var_Control		VARCHAR(50);
 	DECLARE Var_Consecutivo		VARCHAR(200);
 	DECLARE Var_NombreCompleto	VARCHAR(500);	-- Nombre Completo del Cliente
 	
 	-- Declaracion de Constantes
-	DECLARE Cadena_Vacia		CHAR(1);		-- Constante cadena vacia ''
-	DECLARE Entero_Cero			INT(1);			-- Constante Entero cero 0
-	DECLARE Fecha_Vacia			DATE;			-- Constante Fecha vacia 1900-01-01
-	DECLARE SalidaSi			CHAR(1);
+	DECLARE Cadena_Vacia		CHAR(1);	-- Constante cadena vacia ''
+	DECLARE Entero_Cero		INT(1);		-- Constante Entero cero 0
+	DECLARE Fecha_Vacia		DATE;		-- Constante Fecha vacia 1900-01-01
+	DECLARE SalidaSi		CHAR(1);
 	
 	-- Asignacion de constantes
-	SET Cadena_Vacia			:= '';
-	SET Entero_Cero				:= 0;
-	SET Fecha_Vacia				:= '1900-01-01';
-	SET SalidaSi				:= 'S';
+	SET Cadena_Vacia		:= '';
+	SET Entero_Cero			:= 0;
+	SET Fecha_Vacia			:= '1900-01-01';
+	SET SalidaSi			:= 'S';
  
     ManejoErrores:BEGIN
 		DECLARE EXIT HANDLER FOR SQLEXCEPTION
