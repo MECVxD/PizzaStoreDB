@@ -9,36 +9,36 @@ DELIMITER $$
 
 CREATE PROCEDURE `PIZCLIENTESALT`(
 /* SP para realizar alta de clientes*/
-	Par_Nombres					VARCHAR(250), 	-- Nombres del Cliente
-	Par_Apellidos				VARCHAR(250), 	-- Apellidos del Cliente
-	Par_Estatus					CHAR(1),			-- Estatus del Cliente\nA .- Activo\nB .- Bloqueado\nC .- Cancelado o Baja\nI .- Inactivo
+	Par_Nombres				VARCHAR(250), 		-- Nombres del Cliente
+	Par_Apellidos				VARCHAR(250), 		-- Apellidos del Cliente
+	Par_Estatus				CHAR(1),		-- Estatus del Cliente\nA .- Activo\nB .- Bloqueado\nC .- Cancelado o Baja\nI .- Inactivo
 	Par_FechaAlta				DATE,			-- Fecha alta cliente 
-	Par_RFC						CHAR(13), 	 	-- RFC del Cliente
-	Par_Direccion				VARCHAR(200),	-- Direccion Completa del Cliente
+	Par_RFC					CHAR(13), 	 	-- RFC del Cliente
+	Par_Direccion				VARCHAR(200),		-- Direccion Completa del Cliente
 	Par_FechaNacimiento			DATE, 		 	-- Fecha de Nacimiento del Cliente
-	Par_Telefono				VARCHAR(10), 	-- Telefono Oficial del Cliente
+	Par_Telefono				VARCHAR(10), 		-- Telefono Oficial del Cliente
 	
-	Par_Salida					CHAR(1), 		-- Indica mensaje de Salida
+	Par_Salida				CHAR(1), 		-- Indica mensaje de Salida
 	INOUT Par_NumErr			INT(11),		-- Numero de Error
-	INOUT Par_ErrMen			VARCHAR(400),	-- Descripcion de Error
+	INOUT Par_ErrMen			VARCHAR(400),		-- Descripcion de Error
 
 	Aud_EmpresaID				INT(11),		-- Parametro de Auditoria
-	Aud_Usuario					INT(11),		-- Parametro de Auditoria
+	Aud_Usuario				INT(11),		-- Parametro de Auditoria
 	Aud_FechaActual				DATETIME,		-- Parametro de Auditoria
-	Aud_DireccionIP				VARCHAR(15),	-- Parametro de Auditoria
-	Aud_ProgramaID				VARCHAR(50),	-- Parametro de Auditoria
+	Aud_DireccionIP				VARCHAR(15),		-- Parametro de Auditoria
+	Aud_ProgramaID				VARCHAR(50),		-- Parametro de Auditoria
 	Aud_Sucursal				INT(11),		-- Parametro de Auditoria
 	Aud_NumTransaccion			BIGINT(20)		-- Parametro de Auditoria
 )
 TerminaStore: BEGIN
 	-- Declaracion de Variables
 	DECLARE Var_Control			VARCHAR(50);
-	DECLARE Var_Consecutivo		VARCHAR(200);
-	DECLARE Var_ClienteID       INT(11);		-- Numero de Cliente
-	DECLARE Var_NombreCompleto	VARCHAR(500);	-- Nombre Completo del Cliente
+	DECLARE Var_Consecutivo			VARCHAR(200);
+	DECLARE Var_ClienteID       		INT(11);		-- Numero de Cliente
+	DECLARE Var_NombreCompleto		VARCHAR(500);		-- Nombre Completo del Cliente
 	
 	-- Declaracion de Constantes
-	DECLARE Cadena_Vacia		CHAR(1);		-- Constante cadena vacia ''
+	DECLARE Cadena_Vacia			CHAR(1);		-- Constante cadena vacia ''
 	DECLARE Entero_Cero			INT(1);			-- Constante Entero cero 0
 	DECLARE Fecha_Vacia			DATE;			-- Constante Fecha vacia 1900-01-01
 	DECLARE SalidaSi			CHAR(1);
@@ -129,13 +129,13 @@ TerminaStore: BEGIN
 			INSERT INTO PIZCLIENTES(
 				ClienteID,		Nombres,			Apellidos,		NombreCompleto,		Estatus,	
 				FechaAlta,		RFC,				Direccion,		FechaNacimiento, 	Telefono,
-				EmpresaID,		Usuario,			FechaActual,	DireccionIP,		ProgramaID,
+				EmpresaID,		Usuario,			FechaActual,		DireccionIP,		ProgramaID,
 				Sucursal,		NumTransaccion
 			)VALUES(
-				Var_ClienteID,	Par_Nombres,		Par_Apellidos,	Var_NombreCompleto,	Par_Estatus,
-				Par_FechaAlta, 	Par_RFC,			Par_Direccion,	Par_FechaNacimiento,Par_Telefono,
-				Aud_EmpresaID,	Aud_Usuario,		Aud_FechaActual,Aud_DireccionIP,	Aud_ProgramaID,
-				Aud_Sucursal,	Aud_NumTransaccion);
+				Var_ClienteID,		Par_Nombres,			Par_Apellidos,		Var_NombreCompleto,	Par_Estatus,
+				Par_FechaAlta, 		Par_RFC,			Par_Direccion,		Par_FechaNacimiento,P	ar_Telefono,
+				Aud_EmpresaID,		Aud_Usuario,			Aud_FechaActual,	Aud_DireccionIP,	Aud_ProgramaID,
+				Aud_Sucursal,		Aud_NumTransaccion);
 
 		SET Par_NumErr		:= 000;
 		SET Par_ErrMen		:= 'Cliente Agregado Exitosamente';
